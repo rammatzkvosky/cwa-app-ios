@@ -70,6 +70,52 @@ final class HTTPClient: Client {
 		}
 	}
 
+	func appVersionConfiguration(
+		completion: @escaping AppVersionCompletionHandler
+	){
+		log(message: "Fetching exposureConfiguation from: \(configuration.appVersionURL)")
+		session.GET(configuration.appVersionURL) { result in
+			switch result {
+			case let .success(response):
+				guard let dayData = response.body else {
+					completion(.failure(.invalidResponse))
+					logError(message: "Failed to download day '': invalid response")
+					return
+				}
+				guard let package = SAPDownloadedPackage(compressedData: dayData) else {
+					logError(message: "Failed to create signed package.")
+					completion(.failure(.invalidResponse))
+					return
+				}
+
+				do {
+					completion(.success(try SAP_ApplicationVersionConfiguration(serializedData: package.bin)))
+				} catch {
+					logError(message: "Failed to get exposure configuration: \(error)")
+					completion(.failure(.invalidResponse))
+				}
+
+			case let .failure(error):
+				var versionInfoTest = SAP_ApplicationVersionConfiguration()
+				var iosTestInfo = SAP_ApplicationVersionInfo()
+				var semanticVersion = SAP_SemanticVersion()
+				semanticVersion.major = 0
+				semanticVersion.minor = 8
+				semanticVersion.patch = 3
+				var semanticVersion2 = SAP_SemanticVersion()
+				semanticVersion2.major = 0
+				semanticVersion2.minor = 8
+				semanticVersion2.patch = 3
+				iosTestInfo.latest = semanticVersion
+				iosTestInfo.min = semanticVersion2
+				versionInfoTest.ios = iosTestInfo
+				completion(.success(versionInfoTest))
+				completion(.failure(error))
+				logError(message: "Failed to download day '' due to error: \(error).")
+			}
+		}
+	}
+
 	func submit(
 		keys: [ENTemporaryExposureKey],
 		tan: String,

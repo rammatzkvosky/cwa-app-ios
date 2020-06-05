@@ -46,6 +46,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, RequiresAppDepend
 			)
 		}
 	}
+	private var versionCheck: AppVersionCheck?
 
 	private var developerMenu: DMDeveloperMenu?
 
@@ -97,6 +98,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, RequiresAppDepend
 	func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
 		let window = UIWindow(windowScene: windowScene)
+		self.versionCheck = AppVersionCheck(client: client)
 		self.window = window
 
 		exposureManager.resume(observer: self)
@@ -130,6 +132,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, RequiresAppDepend
 		UINavigationBar.appearance().tintColor = UIColor.preferredColor(for: .tint)
 		window?.rootViewController = navigationController
 		window?.makeKeyAndVisible()
+		versionCheck?.checkAppVersionDialog(for: window?.rootViewController)
 	}
 
 	private func showHome(animated _: Bool = false) {

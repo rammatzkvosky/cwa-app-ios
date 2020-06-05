@@ -87,6 +87,10 @@ protocol Client {
 		completion: @escaping ExposureConfigurationCompletionHandler
 	)
 
+	typealias AppVersionCompletionHandler = (Result<SAP_ApplicationVersionConfiguration, Failure>) -> Void
+	/// Gets the AppInfo configuration from the backend with infos about the minimum and current App Version
+	func appVersionConfiguration(completion: @escaping AppVersionCompletionHandler )
+
 	/// Submits exposure keys to the backend. This makes the local information available to the world so that the risk of others can be calculated on their local devices.
 	/// Parameters:
 	/// - keys: An array of `ENTemporaryExposureKey`s  to submit to the backend.

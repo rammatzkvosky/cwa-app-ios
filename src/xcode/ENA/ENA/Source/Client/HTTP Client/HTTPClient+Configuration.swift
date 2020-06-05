@@ -128,6 +128,16 @@ extension HTTPClient {
 				)
 		}
 
+		var appVersionURL: URL {
+			endpoints
+			.distribution
+			.appending("version",
+			apiVersion,
+			"parameters",
+			"country",
+			country)
+		}
+
 		var submissionURL: URL {
 			endpoints
 				.submission
