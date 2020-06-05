@@ -18,6 +18,7 @@ mkdir -p ../../src/xcode/gen/output
 protoc \
      --swift_out=../../src/xcode/gen/output \
      ./app_config.proto \
+     ./app_version_config.proto \
      ./submission_payload.proto \
      ./apple_export.proto \
      ./temporary_exposure_key_export.proto \
