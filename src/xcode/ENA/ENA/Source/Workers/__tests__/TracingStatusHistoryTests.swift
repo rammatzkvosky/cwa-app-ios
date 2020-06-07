@@ -64,7 +64,7 @@ final class TracingStatusHistoryTests: XCTestCase {
 	}
 
 	// MARK: - TracingStatusHistory Risk Calculation Condition Checking
-	// RiskLevel calculations require that tracing has been on for at least 24 hours
+	// RiskLevel calculations require that tracing has been on for at least 48 hours
 
 	func testIfTracingActiveForThresholdDuration_EnabledDistantPast() throws {
 		// Test the simple case where the user enabled notification tracing,

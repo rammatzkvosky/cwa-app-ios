@@ -37,9 +37,9 @@ enum RiskLevel: Int, CaseIterable {
 	///
 	/// - important: Should overrule `.unknownOutdated`, and `.unknownInitial`
 	case increased
-	/// Unknown risk  last calculation more than 24 hours old
+	/// Unknown risk  last calculation more than 48 hours old
 	///
-	/// Will be shown when the last calculation is more than 24 hours old - until the calculation is run again
+	/// Will be shown when the last calculation is more than 48 hours old - until the calculation is run again
 	/// - important: Overrules `.increased` and `low`
 	case unknownOutdated
 	/// Unknown risk - no calculation has been performed yet

@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	let taskScheduler = ENATaskScheduler.shared
 	lazy var riskProvider: RiskProvider = {
 		var duration = DateComponents()
-		duration.day = 2
+		duration.hour = 48
 
 		let config = RiskProvidingConfiguration(
 			exposureDetectionValidityDuration: duration

@@ -37,7 +37,7 @@ enum RiskCalculation {
 
 	Preconditions:
 	1. Check that notification exposure is turned on (via preconditions) on If not, `.inactive`
-	2. Check tracingActiveHours >= 24 (needs to be active for 24hours) If not, `.unknownInitial`
+	2. Check tracingActiveHours >= 48 (needs to be active for 48 hours) If not, `.unknownInitial`
 	3. Check if ExposureDetectionSummaryContainer is there. If not, `.unknownInitial`
 	4. Check dateLastExposureDetection is less than 2 days ago. If not `.unknownOutdated`
 
