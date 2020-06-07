@@ -105,9 +105,9 @@ final class TracingStatusHistoryTests: XCTestCase {
 		let badState = ExposureManagerState(authorized: true, enabled: false, status: .active)
 		let goodState = ExposureManagerState(authorized: true, enabled: true, status: .active)
 
-		var date = Date().addingTimeInterval(.init(hours: -30))
+		var date = Date().addingTimeInterval(.init(hours: -50))
 
-		// User enabled the tracing 30 hours ago
+		// User enabled the tracing 50 hours ago
 		history = history.consumingState(goodState, date)
 		XCTAssertFalse(history.checkIfEnabled(since: date))
 
@@ -123,9 +123,9 @@ final class TracingStatusHistoryTests: XCTestCase {
 		history = history.consumingState(goodState, date)
 		XCTAssertFalse(history.checkIfEnabled(since: date))
 
-		date = date.addingTimeInterval(.init(hours: 20))
+		date = date.addingTimeInterval(.init(hours: 24))
 
-		// User leaves it on for 20 hours - We've been tracking for 21 hours
+		// User leaves it on for 24 hours - We've been tracking for 25 hours
 		XCTAssertFalse(history.checkIfEnabled(since: date))
 
 		// User leaves it on up and including until now
